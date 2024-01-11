@@ -1,13 +1,15 @@
 # main_app/views.py
 
 from django.shortcuts import get_object_or_404, render
+from django.views.generic.edit import CreateView 
+# , UpdateVeiw, DeleteVeiw
 from .models import Finch
 
-finches = [
-    {'name': 'Zebra Finch', 'description': 'Small and colorful bird.', 'age': 1},
-    {'name': 'Gouldian Finch', 'description': 'Rainbow coloring.', 'age': 2},
-    # ... Add more finch objects as needed
-]
+# # finches = [
+# #     {'name': 'Zebra Finch', 'description': 'Small and colorful bird.', 'age': 1},
+# #     {'name': 'Gouldian Finch', 'description': 'Rainbow coloring.', 'age': 2},
+#     # ... Add more finch objects as needed
+# ]
 #home veiw
 def home(request):
     return render(request, 'home.html')
@@ -25,3 +27,9 @@ def finches_detail(request, finch_id):
     finch = get_object_or_404(Finch, pk=finch_id)
     #finch = Finch.objects.get(id=finch_id)
     return render(request, 'finches/detail.html', { 'finch': finch })
+
+#Create veiw 
+class FinchCreate(CreateView):
+    model = Finch
+    fields = '__all__'
+
